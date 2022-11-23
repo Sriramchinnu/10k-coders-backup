@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+     <label for="fname">firstname:</label>
+     <input type="text" name="" id="fname"><br><br>
+     <label for="lname">lasttname:</label>
+     <input type="text" name="" id="lname"><br><br>
+     <label for="email">email:</label>
+     <input type="email" name="" id="email"><br><br>
+     <label for="Gender">Gender:</label><br>
+     <input type="radio" name="gender" id="" value="male"/>Male<br>
+     <input type="radio" name="gender" id="" value="female"/>female<br>
+     <label for="subject">subject :</label><br>
+     <input type="checkbox" name="subject" id="" value="html">html<br>
+     <input type="checkbox" name="subject" id="" value="css">css<br>
+     <input type="checkbox" name="subject" id="" value="javascript">javascript<br>
+     <input type="checkbox" name="subject" id="" value="reactjs">reactjs<br>
+     <button type="button" onclick="getuser()">getuser</button>
+
+    </form>
+    <script>
+        function getuser() {
+            var person ={
+                fname: "",
+                lname: "",
+                email: "",
+                gender: "",
+                subject:[]
+        };
+        for (a in person) {
+            if (a !== "gender" && a !== "subject") {
+                person[a] = document.getElementById(a).value;
+            }else if (a == "gender") {
+                var allradiobtns = document.getElementsByname("gender")
+                allradiobtns.forEach((element) => {
+                    if (element.checked) {
+                        person.gender = element.value
+                    }
+                });
+            }else if (a == "subject") {
+                var allcheckboxes = document.getElementByname("subject")
+                allcheckboxes.forEach((element) => {
+                    if (element.checked) {
+                        person[a].push(element.value)
+                    }
+                });
+                console.log("person",person)
+
+                }
+
+            };
+            }
+        
+    </script>
+</body>
+</html>

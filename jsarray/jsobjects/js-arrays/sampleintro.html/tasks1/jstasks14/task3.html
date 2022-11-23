@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <table border="1px">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+       var userInfo=[
+    {
+        "id": 123,
+        "email": "ADeskins@sollicitudin.gov",
+        "username": "VVrtis",
+        "password": "18GiF"
+    },
+    {
+        "id": 124,
+        "email": "NFord@nec.gov",
+        "username": "VKarma",
+        "password": "HX5Su"
+    },
+    {
+        "id": 125,
+        "email": "TWheeler@nec.net",
+        "username": "TBaligian",
+        "password": "7Slni"
+    },
+    {
+        "id": 126,
+        "email": "JIngham@rutrum.com",
+        "username": "APopsikle",
+        "password": "LbfJb"
+    },
+    {
+        "id": 127,
+        "email": "FJohnson@pulvinar.net",
+        "username": "BLiner",
+        "password": "DzgPP"
+    },
+    {
+        "id": 128,
+        "email": "MTeixeira@pulvinar.net",
+        "username": "CBrunie",
+        "password": "2K8UX"
+    },
+    {
+        "id": 129,
+        "email": "LSkiffington@ante.org",
+        "username": "SWoods",
+        "password": "ObaBn"
+    },
+    {
+        "id": 130,
+        "email": "FKaspar@tortor.gov",
+        "username": "GHawkins",
+        "password": "s7NI5"
+    },
+    {
+        "id": 131,
+        "email": "MReddin@porttitor.ly",
+        "username": "MDouglass",
+        "password": "u1lcQ"
+    },
+    {
+        "id": 132,
+        "email": "AStevens@hendrerit.net",
+        "username": "AGulotta",
+        "password": "Vs72I"
+    }
+]
+   userInfo.forEach((ram)=>{
+    var row=document.createElement('tr')
+
+    Object.values(ram).forEach((charan)=>{
+        var column=document.createElement('td')
+        column.innerHTML=charan;
+        row.appendChild(column)
+
+        document.querySelector('tbody').appendChild(row)
+    })
+   })
+    </script>
+</body>
+</body>
+</html>

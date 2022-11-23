@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <form>
+    <label for="university">univercity:</label>
+    <input type="text" name="" id="university"><br>
+
+    <label for="institute">institute:</label>
+    <input type="text" name="" id="institute"><br>
+
+    <label for="branch">branch</label>
+    <select name="" id="branch">
+        <option value="civil">civil</option>
+        <option value="electrones">electrons</option>
+        <option value="mechanical">mechanical</option>
+        <option value="cs">cs</option>
+        <option value="communications">communications</option>
+        <option value="IT">IT</option>
+</select>
+
+<br>
+<label for="degree">degree</label>
+<select name="" id="degree">
+    <option value="be">BE</option>
+    <option value="btech">Btech</option>
+    <option value="mtech">mtech</option>
+</select>
+<label for="status">status : </label>
+<input type="radio" name="status" value="completed">completed
+<input type="radio" name="status" value="pursuing">pursuing <br>
+
+<label for="cgp">cgp</label>
+<input type="number" name="" id="cgp"><br>
+
+<label for="experieance">experieance</label>
+<input type="number" name="" id="experieance"><br>
+
+<label for="website">website</label>
+<input type="text" name="" id="website"><br>
+
+<label for="doj">date of joining</label>
+<input type="date" name="" id="doj"><br>
+
+<label for="subject">subjects: </label><br>
+<input type="checkbox" name="subject" value="html">html<br>
+<input type="checkbox" name="subject" value="css">css<br>
+<input type="checkbox" name="subject" value="javascript">javascript<br>
+<input type="checkbox" name="subject" value="reactjs">reactjs<br>
+
+<button type="button" onclick="adduser()">adduser</button>
+
+   </form> 
+   <script src="./create.js"></script>
+   <script src="./read.js"></script> 
+    <script src="./update.js"></script>
+    <script src="./delete.js"></script>
+</body>
+</html>

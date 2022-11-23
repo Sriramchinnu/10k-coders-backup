@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1px">
+        <thead>
+            <tr>
+                <th>fname</th>
+                <th>lname</th>
+                <th>tel</th>
+                <th>address</th>
+                <th>city</th>
+                <th>state</th>
+                <th>zip</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+         var userDetails =[
+    {
+        "fname": "Marisa",
+        "lname": "Crum",
+        "tel": "(249)043-8650",
+        "address": "5440 Fringilla Ln",
+        "city": "Rolling Meadows",
+        "state": "AZ",
+        "zip": 25518
+    },
+    {
+        "fname": "Prince",
+        "lname": "Cavalier",
+        "tel": "(307)657-9774",
+        "address": "1271 Libero Ln",
+        "city": "Denton",
+        "state": "SD",
+        "zip": 74090
+    },
+    {
+        "fname": "Arlyne",
+        "lname": "Chandrasekahran",
+        "tel": "(242)268-7780",
+        "address": "8314 Nullam St",
+        "city": "Danbury",
+        "state": "AL",
+        "zip": 63856
+    },
+    {
+        "fname": "Imelda",
+        "lname": "Borisyuk",
+        "tel": "(859)393-4196",
+        "address": "644 Magna Ct",
+        "city": "Spencer",
+        "state": "MT",
+        "zip": 29169
+    },
+    {
+        "fname": "Grace",
+        "lname": "Hawthorne",
+        "tel": "(296)762-0308",
+        "address": "7813 Dolor Ln",
+        "city": "Rio Rancho",
+        "state": "MS",
+        "zip": 30941
+    },
+    {
+        "fname": "Wyatra",
+        "lname": "Cicero",
+        "tel": "(614)962-4870",
+        "address": "4564 Dolor Ct",
+        "city": "Shinnston",
+        "state": "MO",
+        "zip": 28828
+    },
+    {
+        "fname": "Vasilis",
+        "lname": "Black",
+        "tel": "(423)819-0962",
+        "address": "1879 Vitae Ave",
+        "city": "Winter Park",
+        "state": "CO",
+        "zip": 65377
+    },
+    {
+        "fname": "Noby",
+        "lname": "Anglin",
+        "tel": "(857)382-8029",
+        "address": "2893 Sed Ct",
+        "city": "Wrentham",
+        "state": "ID",
+        "zip": 85804
+    },
+    {
+        "fname": "Cecelia",
+        "lname": "Kaspar",
+        "tel": "(453)836-1781",
+        "address": "81 Velit Rd",
+        "city": "Saucier",
+        "state": "DC",
+        "zip": 64384
+    },
+    {
+        "fname": "Bryan",
+        "lname": "Meyers",
+        "tel": "(521)734-9657",
+        "address": "1964 Sed Ln",
+        "city": "Conroe",
+        "state": "WY",
+        "zip": 73537
+    }
+]
+
+  userDetails.forEach((charan)=>{
+    var row = document.createElement('tr')
+
+    for(a in charan){
+        var column=document.createElement('td')
+        column.innerHTML=charan[a]
+        row.appendChild(column)
+    }
+
+    document.querySelector("tbody").appendChild(row)
+
+  }) 
+
+  
+    </script>
+</body>
+</html>

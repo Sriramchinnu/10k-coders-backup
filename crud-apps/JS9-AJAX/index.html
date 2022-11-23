@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="getdatafromserver()">get data</button>
+    <table border="1">
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>username</th>
+            <th>email</th>
+            <th>phone</th>
+            <th>website</th>
+            <th>edit</th>
+            <th>delete</th>
+        </tr>
+    </head>
+    <tbody></tbody>
+    </table>
+    <script>
+        var users = []
+function getdatafromserver(){
+    console.log("getdatafromserver called !!")
+    var getdata = new XMLHttpRequest() ;
+    console.log(getdata)
+    getdata.onreadystatechange = function(){
+        if(getdata.readyState == 4 && getdata.status == 200){
+            //console.log(getdata.response)
+            users = JSON.parse(getdata.response)
+            displayusers(users)
+            console.log(users)
+        }
+
+    }
+   // var apiurl = "http://filltext.com/?rows=5&fname={firstName}&company={business}&phone={phone}&pretty=true"
+    var apiurl = "https://jsonplaceholder.typicode.com/users"
+    getdata.open("GET",apiurl)
+    getdata.send()
+}
+getdatafromserver();
+
+function displayusers(){
+    users.forEach((user,i)=>{
+        var myTr = document.createElement("tr");
+        for(a in user){
+            var mytd = document.createElement("td");CD
+            if(a !=="address" && a !=="company"){
+                mytd.innerHTML= user[a];
+                myTr.appendChild(mytd);
+
+            }
+        }
+        var edittd = document.createElement("td");
+        var editBtn = document.createElement("button");
+        editBtn.innerHTML = "EDIT";
+        editBtn.setAttribute("onclick", "deleteuser(" + i + "}");
+        editBtn.appendChild(editBtn);
+        mytr.appendChild(edittd);
+
+        var deletetd = document.createElement("td");
+        var deleteBtn = document.createElement("button");
+        deleteBtn.setAttribute("onclick", "deleteuser(" + i + "}");
+        deleteBtn.innerHTML = "DELETE";
+        deletetd.appendChild(deleteBtn);
+        mytr.appendChild(deletetd);
+        
+
+
+    document.querySelector("tbody").appendChild(mytr)
+    });
+}
+function edituser(){
+
+}
+    function deleteuser(i){
+
+    }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        var fullnames=[
+    {
+        "fname": "Danyell",
+        "lname": "Star"
+    },
+    {
+        "fname": "Alesia",
+        "lname": "Chapman"
+    },
+    {
+        "fname": "Gail",
+        "lname": "Billanti"
+    },
+    {
+        "fname": "Danielle",
+        "lname": "Buxton"
+    },
+    {
+        "fname": "Chunlei",
+        "lname": "Dominique"
+    },
+    {
+        "fname": "Liset",
+        "lname": "Welchert"
+    },
+    {
+        "fname": "Rakesh",
+        "lname": "Maclatchie"
+    },
+    {
+        "fname": "Geraldine",
+        "lname": "Azzarello"
+    },
+    {
+        "fname": "Karla",
+        "lname": "Darling"
+    },
+    {
+        "fname": "Arshad",
+        "lname": "Planty"
+    }
+]
+
+    
+   fullnames.forEach((ram)=>{
+    var row = document.createElement("tr")
+
+    var column1 = document.createElement("td");
+    column1.innerHTML = ram.fname
+    row.appendChild(column1)
+
+    var column2 = document.createElement("td");
+    column2.innerHTML = ram.lname
+    row.appendChild(column2)
+
+    
+
+    document.querySelector('tbody').appendChild(row)
+ })
+</script>
+</body>
+</html>
