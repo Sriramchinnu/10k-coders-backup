@@ -1,87 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <button onclick="getdatafromserver()">get data</button>
+     
+     <style>
+      label{
+        display: inline-block;
+        width: 100px;
+      }
+      .forms{
+        position: relative;
+        left: 250px;
+      }
+      #updateBtn{
+        display: none;
+      }
+     </style>
+
+  </head>
+  <body>
+
+    <button onclick="getDataFromServer()">Get Data</button>
+    
+    
     <table border="1">
+      <thead>
         <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>username</th>
-            <th>email</th>
-            <th>phone</th>
-            <th>website</th>
-            <th>edit</th>
-            <th>delete</th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Website</th>
+          <th>EDIT</th>
+          <th>DELETE</th>
         </tr>
-    </head>
-    <tbody></tbody>
-    </table>
+      </thead>
+      <tbody></tbody>
+    </table><br><br>
+
+
+
+    <div class="forms">
+      <form>
+        <label for="id" >ID:</label>
+        <input type="text" name="" id='id' disabled><br><br>
+
+        <label for="name">Name:</label>
+        <input type="text" name="" id="name"><br><br>
+
+        <label for="username">Username:</label>
+        <input type="text" name="" id="username"><br><br>
+
+        <label for="email">Email:</label>
+        <input type="text" name="" id="email"><br><br>
+
+        <label for="phone">Phone:</label>
+        <input type="text" name="" id="phone"><br><br>
+
+        <label for="website">Website:</label>
+        <input type="text" name="" id="website"><br><br>
+
+        <button type="button" id="createBtn" onclick="createuser()">CREATE</button>
+        <button type="button" id="updateBtn" onclick="updateuser()">UPDATE</button>
+      </form>
+    </div>
+  
     <script>
-        var users = []
-function getdatafromserver(){
-    console.log("getdatafromserver called !!")
-    var getdata = new XMLHttpRequest() ;
-    console.log(getdata)
-    getdata.onreadystatechange = function(){
-        if(getdata.readyState == 4 && getdata.status == 200){
-            //console.log(getdata.response)
-            users = JSON.parse(getdata.response)
-            displayusers(users)
-            console.log(users)
-        }
+      var local_api_url = "http://localhost:3000/users/";
 
-    }
-   // var apiurl = "http://filltext.com/?rows=5&fname={firstName}&company={business}&phone={phone}&pretty=true"
-    var apiurl = "https://jsonplaceholder.typicode.com/users"
-    getdata.open("GET",apiurl)
-    getdata.send()
-}
-getdatafromserver();
+      var users = [];
+      function getDataFromServer() {
+        console.log("getDataFromServer called !!");
+        var getdata = new XMLHttpRequest();
+        getdata.onreadystatechange = function () {
+          if (getdata.readyState == 4 && getdata.status == 200) {
+            users = JSON.parse(getdata.response);
+            displayUsers(users);
+            console.log(users);
+          }
+        };
+        // var api_url = "https://filltext.com/?rows=5&fname={firstName}&company={business}&pretty=true&phone={phone}"
+        // var api_url = "https://jsonplaceholder.typicode.com/users";
+        getdata.open("GET", local_api_url);
+        getdata.send();
+      }
+      getDataFromServer();
 
-function displayusers(){
-    users.forEach((user,i)=>{
-        var myTr = document.createElement("tr");
-        for(a in user){
-            var mytd = document.createElement("td");CD
-            if(a !=="address" && a !=="company"){
-                mytd.innerHTML= user[a];
-                myTr.appendChild(mytd);
-
+      function displayUsers(users) {
+        document.querySelector("tbody").innerHTML="";
+        users.forEach((user, i) => {
+          var myTr = document.createElement("tr");
+          for (a in user) {
+            var myTd = document.createElement("td");
+            if (a !== "address" && a !== "company"){
+              myTd.innerHTML = user[a];
+              myTr.appendChild(myTd);
             }
-        }
-        var edittd = document.createElement("td");
-        var editBtn = document.createElement("button");
-        editBtn.innerHTML = "EDIT";
-        editBtn.setAttribute("onclick", "deleteuser(" + i + "}");
-        editBtn.appendChild(editBtn);
-        mytr.appendChild(edittd);
+          }
+          var editTd = document.createElement("td");
+          var editBtn = document.createElement("button");
+          editBtn.innerHTML = "EDIT";
+          editBtn.setAttribute("onclick", "editUser(" + i + ")");
+          editTd.appendChild(editBtn);
+          myTr.appendChild(editTd);
 
-        var deletetd = document.createElement("td");
-        var deleteBtn = document.createElement("button");
-        deleteBtn.setAttribute("onclick", "deleteuser(" + i + "}");
-        deleteBtn.innerHTML = "DELETE";
-        deletetd.appendChild(deleteBtn);
-        mytr.appendChild(deletetd);
-        
+          var deleteTd = document.createElement("td");
+          var deleteBtn = document.createElement("button");
+          deleteBtn.setAttribute("onclick", "deleteUser(" + i + ")");
+          deleteBtn.innerHTML = "DELETE";
+          deleteTd.appendChild(deleteBtn);
+          myTr.appendChild(deleteTd);
+          document.querySelector("tbody").appendChild(myTr);
+        });
+      }
+
+      function editUser(i) {
+          var userEdited = users[i]
+          for(a in userEdited){
+           if(a !=='company' && a !=='address'){
+            document.getElementById(a).value = userEdited[a]
+           }
+          }
+          swap(true)
+      }
 
 
-    document.querySelector("tbody").appendChild(mytr)
-    });
-}
-function edituser(){
+      function updateuser(){
+         var newOne = readfromform();
+         console.log(newOne)
+         var createuser = new XMLHttpRequest()
+          createuser.onreadystatechange = function(){
+            if( createuser.readyState ==4 && createuser.status ==201){
+              getDataFromServer()
+            }
+          }
+      
+      createuser.open("PUT", local_api_url+newOne.id)
+      createuser.setRequestHeader("Content-Type","application/json")
+      createuser.send(JSON.stringify(newOne))
+   } 
 
-}
-    function deleteuser(i){
 
-    }
+      function swap(num){
+         if(num){
+          document.getElementById('createBtn').style.display="none"
+          document.getElementById("updateBtn").style.display="block"
+         }else{
+          document.getElementById('createBtn').style.display="block"
+          document.getElementById("updateBtn").style.display="none"
+         }
+         
+      }
 
 
+
+
+     
+      function deleteUser(i) {
+        var delUser = new XMLHttpRequest();
+        delUser.onreadystatechange = function () {
+          if (delUser.readyState == 4 && delUser.status == 200) {
+            getDataFromServer();
+          }
+        };
+        delUser.open("DELETE",local_api_url+users[i].id);
+        delUser.send()
+      }
+
+     
+     
+     
+     
+      function createuser(){
+         var newOne = readfromform()
+          //  console.log(newOne) 
+         var createuser = new XMLHttpRequest()
+         createuser.onreadystatechange = function(){
+          if (createuser.readyState ==4 && createuser.status == 201){
+            getDataFromServer()
+          }
+         }
+         createuser.open("POST", local_api_url)
+         createuser.setRequestHeader("Content-Type","application/json")
+         createuser.send(JSON.stringify(newOne))
+      }
+
+      function readfromform(){
+          var user={
+            id:"",
+            name:"",
+            username:"",
+            email:"",
+            phone:"",
+            website:"",
+          }
+          for (a in user){
+            user[a] = document.getElementById(a).value
+          }
+          
+          return user
+      }
     </script>
-</body>
+  </body>
 </html>

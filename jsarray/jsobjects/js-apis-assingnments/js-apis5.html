@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign--3</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@500&family=Tourney:wght@600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'poppins', sans-serif;
+        }
+
+        fieldset {
+            margin: 9px;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <h2>Using the Call-Back Function</h2>
+        <button onclick="getDataFromServer()">Click to Get the Movie Details</button>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Imdb Id</th>
+                    <th>Title</th>
+                    <th>IMDB Rating</th>
+                    <th>Released</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <script>
+            function getDataFromServer() {
+                var getdata = new XMLHttpRequest();
+                var params = {
+                    start_year: '1970',
+                    end_year: '2020',
+                    min_imdb: '6',
+                    max_imdb: '7.8',
+                    genre: 'action',
+                    language: 'english',
+                    type: 'movie',
+                    sort: 'latest',
+                    page: '1'
+                }
+                getdata.onreadystatechange = function () {
+                    if (getdata.readyState === 4 && getdata.status === 200) {
+                        data = JSON.parse(getdata.response)
+                        console.log(data.results)
+                        displayMoviedetails(data)
+                    }
+                }
+                getdata.open("GET", 'https://ott-details.p.rapidapi.com/advancedsearch' + formatParams(params))
+                getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                getdata.setRequestHeader('X-RapidAPI-Host',  'ott-details.p.rapidapi.com')
+                getdata.send();
+            }
+            
+
+
+
+
+            function displayMoviedetails(data) {
+                data.results.forEach((a) => {
+                    console.log(a.title)
+                    var row = document.createElement('tr')
+                    for (b in a) {
+                        if (b !== "genre" && b !=="imageurl" && b !=="synopsis") {
+
+                            var TitleTd = document.createElement('td')
+                            TitleTd.innerHTML = a[b];
+                            row.appendChild(TitleTd);
+                        }
+                    }
+                    document.querySelector("tbody").appendChild(row)
+                })
+            }
+
+
+
+            function formatParams(params) {
+                return "?" + Object
+                    .keys(params)
+                    .map(function (key) {
+                        return key + "=" + encodeURIComponent(params[key])
+                    })
+                    .join("&")
+            }
+            console.log(formatParams(params))
+
+        </script>
+    </fieldset>
+
+
+
+
+
+
+
+    <fieldset>
+        <h2>Using the Promise Method</h2>
+        <button onclick="getMoviedetails()">Click to Get the Movie Details</button>
+        <ol></ol>
+        <script>
+            function getFromServer() {
+                return new Promise((resolve, reject) => {
+                    var getdata = new XMLHttpRequest();
+                    var params = {
+                        start_year: '1970',
+                        end_year: '2020',
+                        min_imdb: '6',
+                        max_imdb: '7.8',
+                        genre: 'action',
+                        language: 'english',
+                        type: 'movie',
+                        sort: 'latest',
+                        page: '1'
+                    }
+                    getdata.onreadystatechange = function () {
+                        if (getdata.readyState === 4 && getdata.status === 200) {
+                            data = JSON.parse(getdata.response)
+                            resolve(data)
+                        }
+                    }
+                    getdata.open("GET", 'https://ott-details.p.rapidapi.com/advancedsearch' + formatParams(params))
+                    getdata.setRequestHeader('X-RapidAPI-Key', 'X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                    getdata.setRequestHeader('X-RapidAPI-Host', 'X-RapidAPI-Host', 'ott-details.p.rapidapi.com')
+                    getdata.send();
+                })
+            }
+
+
+            function getMoviedetails() {
+                getFromServer().then((data) => {
+                    data.results.forEach((a) => {
+                        var MyLi = document.createElement('li');
+                        MyLi.innerHTML = a.title;
+                        document.querySelector("ol").appendChild(MyLi);
+                        // console.log(a.titleText.text)
+                    })
+                })
+            }
+
+
+            function formatParams(params) {
+                return "?" + Object
+                    .keys(params)
+                    .map(function (key) {
+                        return key + "=" + encodeURIComponent(params[key])
+                    })
+                    .join("&")
+            }
+            console.log(formatParams(params))
+
+        </script>
+    </fieldset>
+
+
+
+
+
+
+    <fieldset>
+        <h2>Using the Async & Await Method</h2>
+        <button onclick="getthedetails()">Click to Get the Movie Details</button>
+        <ul></ul>
+        <script>
+            function getdataServer() {
+                return new Promise((resolve, reject) => {
+                    var getdata = new XMLHttpRequest();
+                    var params = {
+                        start_year: '1970',
+                        end_year: '2020',
+                        min_imdb: '6',
+                        max_imdb: '7.8',
+                        genre: 'action',
+                        language: 'english',
+                        type: 'movie',
+                        sort: 'latest',
+                        page: '1'
+                    }
+                    getdata.onreadystatechange = function () {
+                        if (getdata.readyState === 4 && getdata.status === 200) {
+                            resolve(JSON.parse(getdata.response))
+                        }
+                    }
+                    getdata.open("GET", 'https://ott-details.p.rapidapi.com/advancedsearch' + formatParams(params))
+                    getdata.setRequestHeader('X-RapidAPI-Key', 'X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                    getdata.setRequestHeader('X-RapidAPI-Host', 'X-RapidAPI-Host', 'ott-details.p.rapidapi.com')
+                    getdata.send();
+                })
+            }
+
+            function getthedetails() {
+                async function Asyncdatafromserver() {
+                    var info = await getdataServer();
+                    console.log(info)
+                    info.results.forEach((b) => {
+                        var MyLi = document.createElement("li")
+                        MyLi.innerHTML = b.title;
+                        document.querySelector("ul").appendChild(MyLi)
+                    })
+                }
+                Asyncdatafromserver()
+            }
+
+
+
+            function formatParams(params) {
+                return "?" + Object
+                    .keys(params)
+                    .map(function (key) {
+                        return key + "=" + encodeURIComponent(params[key])
+                    })
+                    .join("&")
+            }
+            console.log(formatParams(params))
+
+        </script>
+    </fieldset>
+</body>
+
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign--2</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@500&family=Tourney:wght@600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'poppins', sans-serif;
+        }
+
+        fieldset {
+            margin: 9px;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <h2>Using the Call-Back Function</h2>
+        <!-- <ul></ul> -->
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+
+
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <script>
+            function getDataFromServer() {
+                var getdata = new XMLHttpRequest();
+                var params = { id: 'tt1375666' }
+                getdata.onreadystatechange = function () {
+                    if (getdata.readyState == 4 && getdata.status == 200) {
+                        data = JSON.parse(getdata.response);
+                        //  console.log(data,typeof(data))
+                        disaplayMoviedetails(data)
+                        console.log(data.actors)
+
+                    }
+                }
+                getdata.open('GET', 'https://movie-details1.p.rapidapi.com/imdb_api/movie' + formatParams(params))
+                getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                getdata.setRequestHeader('X-RapidAPI-Host', 'movie-details1.p.rapidapi.com')
+                getdata.send();
+            }
+            getDataFromServer();
+
+            function disaplayMoviedetails(data) {
+                data.actors.forEach((a) => {
+                    // var row = document.createElement('tr')
+                    // for (b in a) {
+                    //     console.log(b)
+                    //     if (b !== "award") {                           
+                    //         var titleTd = document.createElement('td');
+                    //         titleTd.innerHTML = a[b];
+                    //         row.appendChild(titleTd);
+                    //     }
+                    // }
+
+                    console.log(a.name)
+                    var row = document.createElement('tr')
+                    var idTd = document.createElement('td');
+                    idTd.innerHTML = a.id
+                    row.appendChild(idTd);
+
+                    var nameTd = document.createElement('td');
+                    nameTd.innerHTML = a.name
+                    row.appendChild(nameTd);
+                    document.querySelector('tbody').appendChild(row)
+
+
+                })
+
+            }
+
+
+            function formatParams(params) {
+                return "?" + Object
+                    .keys(params)
+                    .map(function (key) {
+                        return key + "=" + encodeURIComponent(params[key])
+                    })
+                    .join("&")
+            }
+            console.log(formatParams(params))
+            getdata();
+        </script>
+    </fieldset>
+
+
+
+
+
+    <fieldset>
+        <h2>Using the Promise Method</h2>
+        <button onclick="displaytheMoviedetails()">Movie List of HollyWood Actors(PROMISE)</button>
+
+        <ol></ol>
+        <script>
+
+            function getusersfromServer() {
+                return new Promise((resolve, reject) => {
+                    var getdata = new XMLHttpRequest
+                    var params = { id: 'tt1375666' }
+                    getdata.onreadystatechange = function () {
+                        if (getdata.readyState == 4 && getdata.status == 200) {
+                            data = JSON.parse(getdata.response)
+                            console.log(data)
+                            resolve(data)
+                            // displayheadings(data)
+                        }
+                    }
+                    getdata.open('GET', 'https://movie-details1.p.rapidapi.com/imdb_api/movie' + formatParams(params))
+                    getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                    getdata.setRequestHeader('X-RapidAPI-Host', 'movie-details1.p.rapidapi.com')
+                    getdata.send();
+                })
+            }
+
+            function displaytheMoviedetails() {
+
+                getusersfromServer().then((data) => {
+                    // console.log("I am success promise", data)
+                    data.actors.forEach((a) => {
+                        var MyLi = document.createElement('li');
+                        MyLi.innerHTML = a.name;
+                        document.querySelector("ol").appendChild(MyLi);
+                        // console.log(a.titleText.text)
+                    })
+
+                })
+                // getjamesbondinfo().then((data) => {
+                //     data.actors.forEach((a) => {
+
+                //         // for (b in a) {
+                //         //     // console.log(b)
+                //         //     if (b !== "award") {                           
+                //         //         var titleTd = document.createElement('td');
+                //         //         titleTd.innerHTML = a[b];
+                //         //         row.appendChild(titleTd);
+                //         //     }
+                //         // }
+
+                //         console.log(a.name)
+                //         var row = document.createElement('tr')
+                //         var idTd = document.createElement('td');
+                //         idTd.innerHTML = a.id
+                //         row.appendChild(idTd);
+
+                //         var nameTd = document.createElement('td');
+                //         nameTd.innerHTML = a.name
+                //         row.appendChild(nameTd);
+                //         document.querySelector('tbody').appendChild(row)
+
+
+                //     })
+
+                // })
+            }
+
+            function formatParams(params) {
+                return "?" + Object
+                    .keys(params)
+                    .map(function (key) {
+                        return key + "=" + encodeURIComponent(params[key])
+                    })
+                    .join("&")
+            }
+            console.log(formatParams(params))
+            getdata();
+            // function displayheadings(data) {
+            //     data.data.forEach((a) => {
+            //         var row = document.createElement('tr')
+            //         // for (b in a) {
+            //         //     // console.log(b)
+            //         //     if (b == "Skyfall") {
+            //         //         console.log(b)
+            //         //     }
+            //         // }
+            //         if (b === "Tom Hardy") {
+            //             console.log(b)
+            //         }
+            //     })
+            // }
+
+        </script>
+    </fieldset>
+
+
+
+
+    <fieldset>
+        <h2>Using the Async & Await Method</h2>
+        <button onclick="displayMoviedetails()">Movie List of HollyWood Actors(Async & Await)</button>
+        <ul></ul>
+        <script>
+            function getFromServer() {
+                return new Promise((resolve, reject) => {
+                    var getdata = new XMLHttpRequest();
+                    var params = { id: 'tt1375666' }
+                    getdata.onreadystatechange = function () {
+                        if (getdata.readyState === 4 && getdata.status === 200) {
+                             resolve(JSON.parse(getdata.response))
+                        }
+                    }
+                    getdata.open('GET', 'https://movie-details1.p.rapidapi.com/imdb_api/movie' + formatParams(params))
+                    getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                    getdata.setRequestHeader('X-RapidAPI-Host', 'movie-details1.p.rapidapi.com')
+                    getdata.send();
+                })
+            }
+
+            function displayMoviedetails(){
+
+                async function Asyncdatafromserver(){
+                var info = await getFromServer();
+                console.log(info)
+                info.actors.forEach((a) => {
+                    var MyLi = document.createElement('li')
+                    MyLi.innerHTML = a.name
+                    document.querySelector("ul").appendChild(MyLi)
+                    // console.log(a.titleText.text)
+                })
+                
+            }
+            Asyncdatafromserver()
+            }
+
+            function formatParams(params) {
+                return "?" + Object
+                    .keys(params)
+                    .map(function (key) {
+                        return key + "=" + encodeURIComponent(params[key])
+                    })
+                    .join("&")
+            }
+            console.log(formatParams(params))
+            getdata();
+        </script>
+    </fieldset>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDEX--4</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>postId</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Body</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table><br><br>
+    <div style="text-align: center;">
+        <button class="btn btn-info" onclick="redirecttocreate()">CREATE</button>
+    </div>
+    <script>
+        var everyuser = [];
+        function getdatafromserver() {
+            fetch("http://localhost:3000/jsoncomments")
+                .then((response) => {
+                    return response.json()
+                }).then((data) => {
+                    console.log(data)
+                    everyuser = data;
+                    displayusers(data);
+                })
+        }
+        getdatafromserver()
+
+        function displayusers(jsoncomments) {
+            jsoncomments.forEach((user, i) => {
+                var row = document.createElement("tr")
+                for (a in user) {
+
+                    var column = document.createElement("td")
+                    column.innerHTML = user[a];
+                    row.appendChild(column);
+                    // if(a ==="Image"){
+                    // var column = document.createElement("td")
+                    // column.innerHTML = user[a];                   
+                    // myImage = document.createElement("img");
+                    // myImage.setAttribute("src", user[a]);
+                    // myImage.setAttribute("style", "width:150px;" )
+                    // column.appendChild(myImage);
+                    // row.appendChild(column);
+                    // }else{
+
+                    // }
+
+
+
+                }
+                var editTd = document.createElement("td");
+                var editBtn = document.createElement("button");
+                editBtn.setAttribute("onclick", "editUser(" + i + ")");
+                editBtn.setAttribute("class", "btn btn-primary")
+                editBtn.innerHTML = "EDIT";
+                editTd.appendChild(editBtn);
+                row.appendChild(editTd);
+
+                var deleteTd = document.createElement("td");
+                var deleteBtn = document.createElement("button");
+                deleteBtn.setAttribute("onclick", "deleteUser(" + i + ")");
+                deleteBtn.setAttribute("class", "btn btn-danger")
+                deleteBtn.innerHTML = "DELETE";
+                deleteTd.appendChild(deleteBtn)
+                row.appendChild(deleteTd);
+                document.querySelector("tbody").appendChild(row)
+            })
+        }
+
+        function deleteUser(i) {
+            window.location.href = "delete5.html?" + everyuser[i].id
+        }
+
+        function editUser(i) {
+            window.location.href = "create5.html?" + everyuser[i].id
+        }
+
+        function redirecttocreate(i) {
+            window.location.href = "create5.html"
+        }
+
+    </script>
+</body>
+
+</html>

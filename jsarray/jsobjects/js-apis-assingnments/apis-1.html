@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign--1</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@500&family=Tourney:wght@600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'poppins', sans-serif;
+        }
+
+        fieldset {
+            margin: 9px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <fieldset>
+        <h2>Using Call-Back Function</h2>
+
+        <ul></ul>
+        <script>
+            function getDataFromServer() {
+                var getdata = new XMLHttpRequest();
+                getdata.onreadystatechange = function () {
+                    if (getdata.readyState == 4 && getdata.status == 200) {
+                        data = JSON.parse(getdata.response);
+                        //  console.log(data,typeof(data))
+                        disaplayMoviedetails(data)
+                    }
+                }
+                getdata.open("GET", "https://moviesdatabase.p.rapidapi.com/titles/x/upcoming");
+                getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b');
+                getdata.setRequestHeader('X-RapidAPI-Host', 'moviesdatabase.p.rapidapi.com');
+                getdata.send();
+            }
+            getDataFromServer();
+
+            function disaplayMoviedetails(data) {
+                data.results.forEach((a) => {
+                    var MyLi = document.createElement('li')
+                    MyLi.innerHTML = a.titleText.text
+                    document.querySelector("ul").appendChild(MyLi);
+                    // console.log(a.titleText.text)
+                })
+                // console.log(data.results,typeof(data.results))
+            }
+
+        </script>
+    </fieldset>
+
+
+
+
+
+    <fieldset>
+        <h2>Using Promise Method</h2>
+        <ol></ol>
+        <script>
+            var data = [];
+            function getusersfromServer() {
+                return new Promise((resolve, reject) => {
+                    var getdata = new XMLHttpRequest();
+                    getdata.onreadystatechange = function () {
+                        if (getdata.readyState == 4 && getdata.status == 200) {
+                            data = JSON.parse(getdata.response);
+                            resolve(data);
+                        }
+                    }
+                    getdata.open("GET", "https://moviesdatabase.p.rapidapi.com/titles/x/upcoming")
+                    getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                    getdata.setRequestHeader('X-RapidAPI-Host', 'moviesdatabase.p.rapidapi.com')
+                    getdata.send();
+                })
+            }
+
+            getusersfromServer().then((data) => {
+                // console.log("I am success promise", data)
+                data.results.forEach((a) => {
+                    var MyLi = document.createElement('li');
+                    MyLi.innerHTML = a.titleText.text;
+                    document.querySelector("ol").appendChild(MyLi);
+                    // console.log(a.titleText.text)
+                })
+
+            })
+        </script>
+    </fieldset>
+
+
+
+
+
+
+    <fieldset>
+        <h2>Uisng the Async & Await Method</h2>
+        <table></table>
+        <script>
+            function getthemoviesdata(){
+                return new Promise((resolve,reject)=>{
+                    var getdata = new XMLHttpRequest();
+                    getdata.onreadystatechange = function(){
+                        if(getdata.readyState ==4 && getdata.status ==200){
+                            resolve(JSON.parse(getdata.response))
+                        }
+                    }
+                    getdata.open("GET", "https://moviesdatabase.p.rapidapi.com/titles/x/upcoming")
+                    getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                    getdata.setRequestHeader('X-RapidAPI-Host', 'moviesdatabase.p.rapidapi.com')
+                    getdata.send();
+                })
+            }
+
+            async function Asyncdatafromserver(){
+                var info = await getthemoviesdata();
+                console.log(info)
+                data.results.forEach((a) => {
+                    var MyLi = document.createElement('li')
+                    MyLi.innerHTML = a.titleText.text
+                    document.querySelector("table").appendChild(MyLi)
+                    // console.log(a.titleText.text)
+                })
+                
+            }
+            Asyncdatafromserver()
+        </script>
+    </fieldset>
+</body>
+
+</html>

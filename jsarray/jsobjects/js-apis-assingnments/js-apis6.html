@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign--6</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@500&family=Tourney:wght@600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'poppins', sans-serif;
+        }
+
+        fieldset {
+            margin: 9px;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <h2>Using the Call-Back Function</h2>
+        <button onclick="getDataFromServer()">Marvel Universe Details</button>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Links</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <script>
+            function getDataFromServer() {
+                var getdata = new XMLHttpRequest();
+                getdata.onreadystatechange = function () {
+                    if (getdata.readyState === 4 && getdata.status === 200) {
+                        data = JSON.parse(getdata.response)
+                        disaplayMoviedetails(data)
+                        console.log(data)
+                    }
+                }
+                getdata.open("GET", 'https://mcu-comics-and-characters.p.rapidapi.com/mcu/comics',)
+                getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                getdata.setRequestHeader('X-RapidAPI-Host', 'mcu-comics-and-characters.p.rapidapi.com')
+                getdata.send()
+            }
+
+
+            function disaplayMoviedetails(data) {
+                data.forEach((a) => {
+                    var row = document.createElement("tr")
+                    for (b in a) {
+                        if (b !== "source") {
+                            var titleTD = document.createElement("td")
+                            titleTD.innerHTML = a[b];
+                            row.appendChild(titleTD)
+                        }
+                    }
+                    document.querySelector("tbody").appendChild(row)
+                })
+            }
+        </script>
+    </fieldset>
+
+
+
+    <fieldset>
+
+        <h2>Using the Promise Method</h2>
+        <button onclick="gettheMoviedetails()">Marvel Universe Details</button>
+        <ul></ul>
+        <script>
+            function getFromServer() {
+                return new Promise((resolve, reject) => {
+                    var getdata = new XMLHttpRequest();
+                    getdata.onreadystatechange = function () {
+                        if (getdata.readyState === 4 && getdata.status === 200) {
+                            data = JSON.parse(getdata.response)
+                            resolve(data)
+                        }
+                    }
+                    getdata.open("GET", 'https://mcu-comics-and-characters.p.rapidapi.com/mcu/comics',)
+                    getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                    getdata.setRequestHeader('X-RapidAPI-Host', 'mcu-comics-and-characters.p.rapidapi.com')
+                    getdata.send()
+                })
+            }
+
+            function gettheMoviedetails(){
+                getFromServer().then((data)=>{
+                     data.forEach((a)=>{
+                        var MyLi = document.createElement("li")
+                        MyLi.innerHTML = a.title;
+                        document.querySelector("ul").appendChild(MyLi)
+                        
+                     })
+                })
+            }
+        </script>
+    </fieldset>
+
+
+
+
+
+    <fieldset>
+        <h2>Using the Async & Await Method</h2>
+        <button onclick="getMoviedetails()">Marvel Universe Details</button>
+        <ol></ol>
+        <script>
+            function getDataServer() {
+                return new Promise((resolve, reject) => {
+                    var getdata = new XMLHttpRequest();
+                    getdata.onreadystatechange = function () {
+                        if (getdata.readyState == 4 && getdata.status == 200) {
+                            resolve(JSON.parse(getdata.response))
+                        }
+                    }
+                    getdata.open("GET", 'https://mcu-comics-and-characters.p.rapidapi.com/mcu/comics',)
+                    getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                    getdata.setRequestHeader('X-RapidAPI-Host', 'mcu-comics-and-characters.p.rapidapi.com')
+                    getdata.send()
+                })
+            }
+
+            function getMoviedetails() {
+                async function Asyncdatafromserver() {
+                    var info = await getDataServer();
+                    console.log(info)
+                    info.forEach((b) => {
+                        var MyLi = document.createElement("li")          
+                        MyLi.innerHTML = b.title;
+                        document.querySelector("ol").appendChild(MyLi)
+                    })
+                }
+                Asyncdatafromserver()
+            }
+        </script>
+    </fieldset>
+</body>
+
+</html>

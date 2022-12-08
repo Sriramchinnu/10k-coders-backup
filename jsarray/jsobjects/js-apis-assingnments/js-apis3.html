@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign--3</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@500&family=Tourney:wght@600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'poppins', sans-serif;
+        }
+
+        fieldset {
+            margin: 9px;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <h2>Using the Call-Back Function</h2>
+        <button onclick="getDataFromServer()">Click to Get the Movie Details</button>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Genre</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <script>
+            function getDataFromServer() {
+                var getdata = new XMLHttpRequest();
+                var params = { year: '2018', genre: 'Comedy' }
+                getdata.onreadystatechange = function () {
+                    if (getdata.readyState === 4 && getdata.status === 200) {
+                        data = JSON.parse(getdata.response)
+                        console.log(data.data)
+                        displayMoviedetails(data)
+                    }
+                }
+                getdata.open("GET", 'https://abir82-bollywood-recommendations.p.rapidapi.com/' + formatParams(params))
+                getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                getdata.setRequestHeader('X-RapidAPI-Host', 'abir82-bollywood-recommendations.p.rapidapi.com')
+                getdata.send();
+            }
+            
+
+
+
+
+            function displayMoviedetails(data) {
+                data.data.forEach((a) => {
+                    console.log(a.Title)
+                    var row = document.createElement('tr')
+                    for (b in a) {
+                        if (b !== "Movie_ID") {
+
+                            var TitleTd = document.createElement('td')
+                            TitleTd.innerHTML = a[b];
+                            row.appendChild(TitleTd)
+                        }
+                    }
+                    document.querySelector("tbody").appendChild(row)
+                })
+            }
+
+
+
+            function formatParams(params) {
+                return "?" + Object
+                    .keys(params)
+                    .map(function (key) {
+                        return key + "=" + encodeURIComponent(params[key])
+                    })
+                    .join("&")
+            }
+            console.log(formatParams(params))
+            
+        </script>
+    </fieldset>
+
+
+
+
+
+
+
+    <fieldset>
+        <h2>Using the Promise Method</h2>
+        <button onclick="getMoviedetails()">Click to Get the Movie Details</button>
+        <ol></ol>
+        <script>
+            function getDataServer() {
+                return new Promise((resolve, reject) => {
+                    var getdata = new XMLHttpRequest();
+                    var params = { year: '2018', genre: 'Comedy' }
+                    getdata.onreadystatechange = function () {
+                        if (getdata.readyState === 4 && getdata.status === 200) {
+                            data = JSON.parse(getdata.response)
+                            resolve(data)
+                        }
+                    }
+                    getdata.open("GET", 'https://abir82-bollywood-recommendations.p.rapidapi.com/' + formatParams(params))
+                    getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                    getdata.setRequestHeader('X-RapidAPI-Host', 'abir82-bollywood-recommendations.p.rapidapi.com')
+                    getdata.send();
+                })
+            }
+
+
+            function getMoviedetails() {
+                getDataServer().then((data) => {
+                    data.data.forEach((a) => {
+                        var MyLi = document.createElement('li');
+                        MyLi.innerHTML = a.Title;
+                        document.querySelector("ol").appendChild(MyLi);
+                        // console.log(a.titleText.text)
+                    })
+                })
+            }
+
+
+            function formatParams(params) {
+                return "?" + Object
+                    .keys(params)
+                    .map(function (key) {
+                        return key + "=" + encodeURIComponent(params[key])
+                    })
+                    .join("&")
+            }
+            console.log(formatParams(params))
+            
+        </script>
+    </fieldset>
+
+
+
+
+
+
+    <fieldset>
+        <h2>Using the Async & Await Method</h2>
+        <button onclick="gettheMoviedetails()">Click to Get the Movie Details</button>
+        <ul></ul>
+        <script>
+            function getFromServer() {
+                return new Promise((resolve, reject) => {
+                    var getdata = new XMLHttpRequest();
+                    var params = { year: '2018', genre: 'Comedy' }
+                    getdata.onreadystatechange = function () {
+                        if (getdata.readyState === 4 && getdata.status === 200) {
+                            resolve(JSON.parse(getdata.response))
+                        }
+                    }
+                    getdata.open("GET", 'https://abir82-bollywood-recommendations.p.rapidapi.com/' + formatParams(params))
+                    getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                    getdata.setRequestHeader('X-RapidAPI-Host', 'abir82-bollywood-recommendations.p.rapidapi.com')
+                    getdata.send();
+                })
+            }
+
+            function gettheMoviedetails() {
+                async function Asyncdatafromserver(){
+                var info =   await getFromServer();
+                console.log(info)
+                    info.data.forEach((b) => {
+                        var MyLi = document.createElement("li")
+                        MyLi.innerHTML = b.Title;
+                        document.querySelector("ul").appendChild(MyLi)
+                    })
+                }
+                Asyncdatafromserver()
+            }
+
+
+
+            function formatParams(params) {
+                return "?" + Object
+                    .keys(params)
+                    .map(function (key) {
+                        return key + "=" + encodeURIComponent(params[key])
+                    })
+                    .join("&")
+            }
+            console.log(formatParams(params))
+            
+        </script>
+    </fieldset>
+</body>
+
+</html>

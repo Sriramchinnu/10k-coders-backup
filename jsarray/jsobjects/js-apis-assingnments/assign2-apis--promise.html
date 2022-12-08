@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+</head>
+<body>
+    <button onclick="displayMoviedetails()">Movie List of James Bond (PROMISE)</button>
+    <table border="1">
+        <thead>
+            <tr>
+                <!-- <th>title</th>
+                <th>year</th>
+                <th>actor</th>
+                <th>director</th>
+                <th>actual_income</th>
+                <th>actual_bugdet</th>
+                <th>rotten_tomatoes</th>
+                <th>metacritic</th>
+                <th>cinemascore</th> -->
+
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+
+    
+    <script>
+         function getDataFromServer(){
+            return new Promise((resolve, reject)=>{
+                var getdata = new XMLHttpRequest();
+                getdata.onreadystatechange = function(){
+                    if(getdata.readyState ===4 && getdata.status ===200){
+                        data = JSON.parse(getdata.response)
+                        // console.log(getdata.response)
+                        resolve(data);
+                        displayheadings(data);
+                    }
+                }
+                getdata.open('GET', 'https://movie-details1.p.rapidapi.com/imdb_api/movie')
+                getdata.setRequestHeader('X-RapidAPI-Key','9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                getdata.setRequestHeader('X-RapidAPI-Host','movie-details1.p.rapidapi.com')
+                getdata.send();
+            })
+         }
+        
+         function displayMoviedetails(){
+            getDataFromServer().then((data)=>{
+            data.actors.forEach((a) => {
+                    var row = document.createElement('tr')
+                    for (b in a) {
+                        // console.log(b)
+                        if (b !== "award") {                           
+                            var titleTd = document.createElement('td');
+                            titleTd.innerHTML = a[b]
+                            row.appendChild(titleTd);
+                        }
+                    }
+
+                    // console.log(a.actors)
+                    // var row = document.createElement('tr')
+                    // var titleTd = document.createElement('td');
+                    // titleTd.innerHTML = a.title
+                    // row.appendChild(titleTd);
+
+                    // var actorTd = document.createElement('td');
+                    // actorTd.innerHTML = a.actor
+                    // row.appendChild(actorTd);
+                    document.querySelector('tbody').appendChild(row)
+
+
+                })
+         })
+         }
+
+         
+         
+         
+         
+         
+         function displayheadings(data){
+            data.data.forEach((a) => {
+                    var row = document.createElement('tr')
+                    for (b in a) {
+                        // console.log(b)
+
+                       if(b ==="No Time to Die"){
+                        console.log(b)
+                        th = document.createElement('th')
+                        th.innerHTML = b;
+                        row.appendChild(th)
+                       }
+
+                        // if (b !== "award") {                           
+                        //     var titleTd = document.createElement('td');
+                        //     titleTd.innerHTML = a[b]
+                        //     row.appendChild(titleTd);
+                        // }
+                    }
+                    
+                    document.querySelector('thead').appendChild(row)
+
+
+                })
+         }
+
+         
+
+    </script>
+</body>
+</html>

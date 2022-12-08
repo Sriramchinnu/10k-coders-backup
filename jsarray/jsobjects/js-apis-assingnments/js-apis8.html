@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign--8</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@500&family=Tourney:wght@600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'poppins', sans-serif;
+        }
+
+        fieldset {
+            margin: 9px;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <h2>Using the Call-Back Function</h2>
+        <button onclick="getDataFromServer()">Game of Thrones</button>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Series Name</th>
+                    <th>Type</th>
+                    <th>Rank</th>
+                    <th>Directors</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <script>
+            function getDataFromServer() {
+                var getdata = new XMLHttpRequest();
+                var params = { q: 'game of thr' };
+                getdata.onreadystatechange = function () {
+                    if (getdata.readyState === 4 && getdata.status === 200) {
+                        data = JSON.parse(getdata.response)
+                        disaplayMoviedetails(data)
+                        console.log(data)
+                    }
+                }
+                getdata.open("GET", 'https://imdb8.p.rapidapi.com/auto-complete' + formatParams(params))
+                getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                getdata.setRequestHeader('X-RapidAPI-Host', 'imdb8.p.rapidapi.com')
+                getdata.send();
+            }
+
+
+            function disaplayMoviedetails(data) {
+                data.d.forEach((a) => {
+                    var row = document.createElement("tr")
+                    for (b in a) {
+                        if (b !== "i" && b !== "id" && b !== "qid" && b !== "yr") {
+                            var titleTD = document.createElement("td")
+                            titleTD.innerHTML = a[b];
+                            row.appendChild(titleTD)
+                        }
+                    }
+                    document.querySelector("tbody").appendChild(row)
+                })
+            }
+
+            function formatParams(params) {
+                return "?" + Object
+                    .keys(params)
+                    .map(function (key) {
+                        return key + "=" + encodeURIComponent(params[key])
+                    })
+                    .join("&")
+            }
+            console.log(formatParams(params))
+
+        </script>
+    </fieldset>
+
+
+
+    <fieldset>
+        <h2>Using The Promise Method</h2>
+        <button onclick="gettheMoviedetails()">Game of Thrones</button>
+        <ol></ol>
+        <script>
+            function getDataServer() {
+                return new Promise((resolve, reject) => {
+                    var getdata = new XMLHttpRequest();
+                    var params = { q: 'game of thr' };
+                    getdata.onreadystatechange = function () {
+                        if (getdata.readyState === 4 && getdata.status === 200) {
+                            data = JSON.parse(getdata.response)
+                            resolve(data)
+                        }
+                    }
+                    getdata.open("GET", 'https://imdb8.p.rapidapi.com/auto-complete' + formatParams(params))
+                    getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                    getdata.setRequestHeader('X-RapidAPI-Host', 'imdb8.p.rapidapi.com')
+                    getdata.send();
+                })
+            }
+
+            function gettheMoviedetails() {
+                getDataServer().then((data) => {
+                    data.d.forEach((a) => {
+                        var MyLi = document.createElement("li")
+                        MyLi.innerHTML = a.l;
+                        document.querySelector("ol").appendChild(MyLi)
+
+                    })
+                })
+            }
+
+
+            function formatParams(params) {
+                return "?" + Object
+                    .keys(params)
+                    .map(function (key) {
+                        return key + "=" + encodeURIComponent(params[key])
+                    })
+                    .join("&")
+            }
+            console.log(formatParams(params))
+        </script>
+    </fieldset>
+
+
+
+    <fieldset>
+        <h2>Using the Async & Await Method</h2>
+        <button onclick="getMoviedetails()">Game of Thrones</button>
+        <ul></ul>
+        <script>
+            function getfromServer() {
+                return new Promise((resolve, reject) => {
+                    var getdata = new XMLHttpRequest();
+                    var params = { q: 'game of thr' };
+                    getdata.onreadystatechange = function () {
+                        if (getdata.readyState == 4 && getdata.status == 200) {
+                            resolve(JSON.parse(getdata.response))
+                        }
+                    }
+                    getdata.open("GET", 'https://imdb8.p.rapidapi.com/auto-complete' + formatParams(params))
+                    getdata.setRequestHeader('X-RapidAPI-Key', '9318c1ed41mshe29d7663df27807p1ece28jsn3ed13146bd1b')
+                    getdata.setRequestHeader('X-RapidAPI-Host', 'imdb8.p.rapidapi.com')
+                    getdata.send();
+                })
+                }
+
+             
+            function getMoviedetails() {
+                        async function Asyncdatafromserver() {
+                            var info = await getfromServer();
+                            console.log(info)
+                            info.d.forEach((b) => {
+                                var MyLi = document.createElement("li")
+                                MyLi.innerHTML = b.l;
+                                document.querySelector("ul").appendChild(MyLi)
+                            })
+                        }
+                        Asyncdatafromserver()
+                    }
+
+            function formatParams(params) {
+                        return "?" + Object
+                            .keys(params)
+                            .map(function (key) {
+                                return key + "=" + encodeURIComponent(params[key])
+                            })
+                            .join("&")
+                    }
+            console.log(formatParams(params))
+        </script>
+    </fieldset>
+</body>
+
+</html>
