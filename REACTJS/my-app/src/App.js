@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Tenkclass1 from './components/Tenkclass1.jsx';
+import TenkclassComp from './components/Tenkclasscomp.jsx';
+import Tenkcoders from './Tenkcoders.jsx'
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <h2>hello from 10k coders</h2>
+      <Tenkcoders/>
+      <TenkclassComp/>
+      <Tenkclass1/>
+    
+    
+
     </div>
   );
 }
 
 export default App;
+
