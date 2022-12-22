@@ -5,7 +5,7 @@ export default class Form5 extends Component {
         super()
         this.state = {
             person: {
-                name: "",
+                name: "ss",
                 username: "",
                 email: "",
                 password: "",
