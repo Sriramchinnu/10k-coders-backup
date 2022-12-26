@@ -1,0 +1,142 @@
+{
+  "User1": [
+    {
+      "id": 1,
+      "name": "ram",
+      "username": "chinnu",
+      "email": "banothsriram351@gmail.com",
+      "password": "12345",
+      "confirmPassword": "12345678",
+      "message": "working"
+    }
+  ],
+  "User2": [
+    {
+      "id": 1,
+      "username": "sriram",
+      "password": "12345",
+      "emailaddress": "ram@gmail.com",
+      "gender": "I am a Man",
+      "dob": "",
+      "height": "5.4",
+      "email": "banothsriram351@gmail.com",
+      "pickgender": "I want to find Man",
+      "year": "1990",
+      "month": "3123",
+      "date": "231",
+      "weight": "59"
+    },
+    {
+      "id": 2,
+      "username": "sriram",
+      "password": "1234",
+      "email": "banothsriram351@gmail.com",
+      "gender": "I am a Man",
+      "pickgender": "I want to find Man",
+      "year": "22",
+      "month": "2",
+      "date": "22",
+      "height": "5.4",
+      "weight": "58"
+    },
+    {
+      "id": 3,
+      "username": "yaminiii",
+      "password": "12345",
+      "email": "banothsriram351@gmail.com",
+      "gender": "I am a Man",
+      "pickgender": "I want to find Man",
+      "year": "23",
+      "month": "22",
+      "date": "22",
+      "height": "5.4",
+      "weight": "58"
+    }
+  ],
+  "User3": [
+    {
+      "id": 1,
+      "univercity": "ku",
+      "institute": "jntuh",
+      "branch": "Mechanical",
+      "degree": "B.sc",
+      "status": "completed",
+      "avarageCpi": "77",
+      "semister": "-255",
+      "experiance": "3",
+      "blog": "ssss"
+    },
+    {
+      "id": 2,
+      "university": "ku",
+      "institute": "kuuu",
+      "branch": "MECH",
+      "degree": "B.Tech",
+      "status": "Completed",
+      "cpi": "2",
+      "sem": "212",
+      "exp": "32",
+      "web": "dsfdsfd"
+    },
+    {
+      "id": 3,
+      "university": "jntuh",
+      "institute": "ddd",
+      "branch": "MECH",
+      "degree": "Degree",
+      "status": "Completed",
+      "cpi": "33",
+      "sem": "44",
+      "exp": "44",
+      "web": "wwww"
+    }
+  ],
+  "User4": [
+    {
+      "id": 1,
+      "street": "bhpl",
+      "city": "hnk",
+      "State1": "bhpll",
+      "zipcode": "12345",
+      "country": "ind"
+    },
+    {
+      "id": 2,
+      "street": "hnkkk",
+      "city": "hhh",
+      "State1": "nn",
+      "zipcode": "6856854",
+      "country": "pkkk"
+    },
+    {
+      "id": 3,
+      "street": "gggg",
+      "city": "ghjfvbf",
+      "State1": "hmvbgh",
+      "zipcode": "5475656",
+      "country": "eng"
+    }
+  ],
+  "User5": [
+    {
+      "email": "zdsgssv@fhludh",
+      "id": 1
+    },
+    {
+      "id": 1,
+      "fname": "ramm",
+      "lname": "sriii",
+      "dob": "4444-04-04",
+      "emailid": "ram@gmail.com",
+      "mobilenumber": "785473566"
+    },
+    {
+      "id": 2,
+      "fname": "yamini",
+      "lname": "chinnu",
+      "dob": "3333-11-22",
+      "email": "ram@gmail.com",
+      "mobile": "12345"
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "firstname": "sriii",
+      "lastname": "chinnu",
+      "dateofbirth": "19-10-97",
+      "emailid": "sriram@gmail.com",
+      "mobilenumber": "9705505105"
+    },
+    {
+      "id": 2,
+      "firstname": "ram",
+      "lastname": "chinnu",
+      "dateofbirth": "19-10-97",
+      "emailid": "sriram@gmail.com",
+      "mobilenumber": "9705505105"
+    }
+  ],
+  "user2": [
+    {
+      "id": 1,
+      "street": "warangal",
+      "city": "hanamkonda",
+      "zipcode": "12345",
+      "country": "india"
+    },
+    {
+      "id": 2,
+      "street": "warangal",
+      "city": "hanamkonda",
+      "zipcode": "12345",
+      "country": "india"
+    },
+    {
+      "id": 5,
+      "street": "hyd",
+      "city": "1234",
+      "zipcode": "1234",
+      "country": "newzeland"
+    },
+    {
+      "id": 6,
+      "street": "sbk",
+      "city": "tg",
+      "zipcode": "12345",
+      "country": "pkkkk"
+    },
+    {
+      "id": 7,
+      "street": "hyd",
+      "city": "1234",
+      "zipcode": "1234",
+      "country": "paris"
+    }
+  ],
+  "User3": [
+    {
+      "id": 1,
+      "username": "srii",
+      "password": "ram123",
+      "email": "srii@gmail.com",
+      "gender1": "I am a man",
+      "gender2": "I want to find women",
+      "dob": "23",
+      "dob2": "6",
+      "dob3": "2001",
+      "height": "6.2 feets",
+      "weight": "85Kgs"
+    },
+    {
+      "id": 2,
+      "username": "chiruu",
+      "password": "prabhas123",
+      "email": "prabhas@gmail.com",
+      "gender1": "I am a women",
+      "gender2": "I want to find man",
+      "dob": "23",
+      "dob2": "6",
+      "dob3": "2001",
+      "height": "6.2 feets",
+      "weight": "95Kgs"
+    },
+    {
+      "id": 3,
+      "username": "srinu",
+      "password": "srinu123",
+      "email": "saipraneethrao23@gmail.com",
+      "gender1": "I am a women",
+      "gender2": "I want to find man",
+      "dob": "24",
+      "dob2": "6",
+      "dob3": "2001",
+      "height": "6.2 feets",
+      "weight": "85Kgs"
+    },
+    {
+      "id": 4,
+      "username": "sri",
+      "password": "ram123",
+      "email": "ram@gmail.com",
+      "gender1": "I am a man",
+      "gender2": "I want to find women",
+      "dob": "23",
+      "dob2": "6",
+      "dob3": "2001",
+      "height": "6.2 feets",
+      "weight": "85Kgs"
+    }
+  ],
+  "User4": [
+    {
+      "id": 1,
+      "university": "JNTUH",
+      "institute": "st.Marys",
+      "branch": "CSE",
+      "degree": "B-TECH",
+      "status": "Pursuing",
+      "average": "75",
+      "experience": "4",
+      "website": "www.st.marys.com"
+    },
+    {
+      "id": 2,
+      "university": "JNTUH",
+      "institute": "malla reddy",
+      "branch": "ECE",
+      "degree": "B-TECH",
+      "status": "Completed",
+      "average": "77",
+      "experience": "6",
+      "website": "www.malla.com"
+    },
+    {
+      "id": 3,
+      "university": "JNTUH",
+      "institute": "CMR",
+      "branch": "CSE",
+      "degree": "MBA",
+      "status": "Pursuing",
+      "average": "76",
+      "experience": "3",
+      "website": "www.CMR.com"
+    },
+    {
+      "id": 5,
+      "university": "JNTUH",
+      "institute": "Vignan",
+      "branch": "Mechanical",
+      "degree": "B-TECH",
+      "status": "Pursuing",
+      "average": "55",
+      "experience": "5",
+      "website": "www.Vignan.com"
+    }
+  ],
+
+"user5": [
+  {
+    "id": 1,
+    "name": "Prabhas",
+    "username": "Prabhas Uppalapaati",
+    "email": "prabhasuppalapaati@gmail.com",
+    "password": "prabha@1234",
+    "confirmpassword": "prabha@1234",
+    "message": "Hi this is Prabhas.....!!!!"
+  },
+  {
+    "id": 2,
+    "name": "Prabhas",
+    "username": "Prabhas Uppalapaati",
+    "email": "prabhasuppalapaati@gmail.com",
+    "password": "prabha@1234",
+    "confirmpassword": "prabha@1234",
+    "message": "Hi this is Prabhas.....!!!!"
+  },
+  {
+    "id": 3,
+    "name": "Prabhas",
+    "username": "Prabhas Uppalapaati",
+    "email": "prabhasuppalapaati@gmail.com",
+    "password": "prabha@1234",
+    "confirmpassword": "prabha@1234",
+    "message": "Hi this is Prabhas.....!!!!"
+  },
+  {
+    "id": 4,
+    "name": "Prabhas",
+    "username": "Prabhas Uppalapaati",
+    "email": "prabhasuppalapaati@gmail.com",
+    "password": "prabha@1234",
+    "confirmpassword": "prabha@1234",
+    "message": "Hi this is Prabhas.....!!!!"
+  }
+]
+}
