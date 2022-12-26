@@ -23,7 +23,7 @@ const handleUser=(e)=>{
 }
 
 useEffect(() => {
-   fetch("http://localhost:3001/User5"+params.id).then((res)=>res.json())
+   fetch("http://localhost:3001/User5/"+params.id).then((res)=>res.json())
    .then((data)=>{
     setUser(data)
    })

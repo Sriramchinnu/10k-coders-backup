@@ -8,7 +8,7 @@ const [user,setUser]=useState({})
  const navigate=useNavigate();
  const params=useParams();
  useEffect(() => {
-     fetch(" http://localhost:3001/User2/"+params.id)
+     fetch("http://localhost:3001/User2/"+params.id)
      .then((res)=>res.json())
      .then((data)=>{
         console.log(data)
@@ -16,7 +16,7 @@ const [user,setUser]=useState({})
  }, []);
 
  const confirmDelete=()=>{
-    fetch("  http://localhost:3001/User2/"+params.id,{
+    fetch("http://localhost:3001/User2/"+params.id,{
         method:'DELETE'
     }).then(()=>{
         navigate('/')
